@@ -23,4 +23,13 @@ test_collection.insert_one(post)
 
 # FIND
 find_result = test_collection.find_one({"user":"user01"})
-print(find_result)
+# print(find_result)
+
+# UPDATE
+test_collection.update_one( {
+        "user":"user01",
+        {
+            "$set" : {"test":"update test"}
+        }
+    }
+)
