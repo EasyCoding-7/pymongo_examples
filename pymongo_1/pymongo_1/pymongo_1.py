@@ -9,5 +9,14 @@ ini_parser.read(iniFile)
 
 # connection db
 connection = pymongo.MongoClient(str(ini_parser['aws']['ip']), int(ini_parser['aws']['port']))
-db = connection.users
-print(db)
+db_test1 = connection.test1
+# print(db)
+# print(db.name)
+
+# create or connect collection
+test_collection = db_test1.test_collection
+# print(test_collection)
+
+# test INSERT
+post = {"user":"user01", "guild":"superman", "type":"knight", "tags":["newbe", "hell"]}
+test_collection.insert_one(post)
