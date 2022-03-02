@@ -20,3 +20,7 @@ test_collection = db_test1.test_collection
 # test INSERT
 post = {"user":"user01", "guild":"superman", "type":"knight", "tags":["newbe", "hell"]}
 test_collection.insert_one(post)
+
+# FIND
+find_result = test_collection.find_one({"user":"user01"})
+print(find_result)
