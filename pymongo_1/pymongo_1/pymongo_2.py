@@ -29,14 +29,43 @@ res = requests.post(url, data=post_data)
 soup = BeautifulSoup(res.content, 'html.parser')
 actors = soup.select('li.people_li div.name')
 
-print("... before paring ...")
+print("... before parsing ...")
 
 for actor in actors:
-    print(actor)
+    print(actor.text)
 
-print("... after paring ...")
+print("... after parsing ...")
 
 # 정규 표현식으로 이름만 뽑기
 for actor in actors:
-    newname = re.sub("\(\w*\)", "", str(actor))  # '\(\w*\)' : 괄호안의( \(\) ) 어떤문자( w* ) 든 '' 삭제해 달라
+    newname = re.sub("\(\w*\)", "", str(actor.text))  # '\(\w*\)' : 괄호안의( \(\) ) 어떤문자( w* ) 든 '' 삭제해 달라
     print(newname)
+
+print("... actor info print ...")
+
+"""
+# 배우 상세정보 추출(정규표현식 이용 전)
+for actor in actors:
+    # print('http://www.cine21.com' + actor.select_one('a').attrs['href'])
+    actor_url = 'http://www.cine21.com' + actor.select_one('a').attrs['href']
+    response_actor = requests.get(actor_url)
+    soup_actor = BeautifulSoup(response_actor.content, 'html.parser')
+    actor_info = soup_actor.select_one('ul.default_info')
+    actor_details = actor_info.select('li')
+    for item in actor_details:
+        print(item)
+"""
+
+# 배우 상세정보 추출(정규표현식 이용)
+for actor in actors:
+    # print('http://www.cine21.com' + actor.select_one('a').attrs['href'])
+    actor_url = 'http://www.cine21.com' + actor.select_one('a').attrs['href']
+    response_actor = requests.get(actor_url)
+    soup_actor = BeautifulSoup(response_actor.content, 'html.parser')
+    actor_info = soup_actor.select_one('ul.default_info')
+    actor_details = actor_info.select('li')
+    for item in actor_details:
+        # print(item)
+        print(item.select_one('span.tit').text)
+        actor_value = re.sub('<span.*?>.*?</span>','',str(item))
+        print(re.sub('<.*?>','',str(actor_value)))
