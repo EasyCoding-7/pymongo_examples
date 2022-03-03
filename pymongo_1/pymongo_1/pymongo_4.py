@@ -1,3 +1,4 @@
+
 import configparser
 import pymongo
 import requests
@@ -24,7 +25,7 @@ post_data['section'] = 'actor'
 post_data['period_start'] = '2020-03'
 post_data['gender'] = 'all'
 
-for pindex in range(1, 21):
+for pindex in range(1, 6):
     post_data['page'] = pindex
 
     res = requests.post(url, data=post_data)
@@ -70,4 +71,5 @@ for pindex in range(1, 21):
 
         actors_detail_info_list.append(actor_info_dict)
 
-print(actors_detail_info_list)
+# print(actors_detail_info_list)
+actor_collection.insert_many(actors_detail_info_list)
