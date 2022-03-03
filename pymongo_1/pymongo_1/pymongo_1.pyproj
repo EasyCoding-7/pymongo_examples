@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>7616b59e-72e6-425f-a4ce-024f6a0a6aab</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>pymongo_4.py</StartupFile>
+    <StartupFile>pymongo_5.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,6 +29,9 @@
     </Compile>
     <Compile Include="pymongo_3.py" />
     <Compile Include="pymongo_4.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pymongo_5.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

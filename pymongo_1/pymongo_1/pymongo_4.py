@@ -17,6 +17,7 @@ ini_parser.read(iniFile)
 conn = pymongo.MongoClient(str(ini_parser['aws']['ip']), int(ini_parser['aws']['port']))
 actor_db = conn.cine21_actor
 actor_collection = actor_db.actor_collection
+actor_collection.delete_many({})
 
 # crawlling
 url = "http://www.cine21.com/rank/person/content"
@@ -25,7 +26,7 @@ post_data['section'] = 'actor'
 post_data['period_start'] = '2020-03'
 post_data['gender'] = 'all'
 
-for pindex in range(1, 6):
+for pindex in range(1, 21):
     post_data['page'] = pindex
 
     res = requests.post(url, data=post_data)
